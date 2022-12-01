@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.remove {
+  background-color: #580b22;
+  color: aliceblue;
+}
