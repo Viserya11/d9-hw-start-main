@@ -1,10 +1,11 @@
-import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Row, Col, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { addCompanyAction } from "../redux/actions";
 
 const Job = ({ data }) => {
   const dispatch = useDispatch();
+
   return (
     <Row
       className="mx-0 mt-3 p-3"
@@ -13,23 +14,17 @@ const Job = ({ data }) => {
       <Col xs={3}>
         <Link to={`/${data.company_name}`}>{data.company_name}</Link>
       </Col>
-      <Col xs={9}>
+      <Col xs={7}>
         <a href={data.url} target="_blank" rel="noreferrer">
           {data.title}
         </a>
-        <Button variant='info'
-          onClick={() =>
-            dispatch({
-              type: "ADD_COMPANY",
-              payload: { data },
-            })
-          }
-        >
-          Add
+      </Col>
+      <Col xs={2}>
+        <Button onClick={() => dispatch(addCompanyAction(data))}>
+          Add to Fav
         </Button>
       </Col>
     </Row>
   );
 };
-
 export default Job;
