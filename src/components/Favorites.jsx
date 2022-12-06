@@ -16,16 +16,7 @@ export default function Favs() {
           <ul style={{ listStyle: "none" }}>
             {jobs.map((job, i) => (
               <Row key={i} className="my-4 align-items-center">
-                <Col xs={1}>
-                  <Button className="remove"
-                    variant="danger"
-                    onClick={() => {
-                      dispatch(removeFromFavsAction(i));
-                    }}
-                  >
-                    Remove
-                  </Button>
-                </Col>
+               
                 <Col>
                   <h3>{job.title}</h3>
                   <Row>
@@ -38,6 +29,16 @@ export default function Favs() {
                     <Col>
                       <a href={job.url}>Link</a>
                     </Col>
+                    <Col xs={1}>
+                  <Button className="remove"
+                    variant="danger"
+                    onClick={() => {
+                      dispatch(removeFromFavsAction(i));
+                    }}
+                  >
+                    Remove
+                  </Button>
+                </Col>
                   </Row>
                 </Col>
               </Row>
