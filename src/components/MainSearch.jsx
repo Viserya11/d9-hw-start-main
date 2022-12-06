@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Spinner, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchJobs, saveSearchValue } from "../redux/actions";
@@ -8,6 +8,8 @@ const MainSearch = () => {
   const dispatch = useDispatch();
   const query = useSelector((state) => state.value.value);
   const jobs = useSelector((state) => state.jobs.stock);
+  const isLoading = useSelector((state) => state.jobs.isLoading);
+  const isError = useSelector((state) => state.jobs.isError )
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const MainSearch = () => {
 
   return (
     <Container>
+      {console.log(isError)}
       <Row>
         <Col xs={10} className="mx-auto my-3">
           <h1>Remote Jobs Search</h1>
@@ -35,11 +38,15 @@ const MainSearch = () => {
             />
           </Form>
         </Col>
-        <Col xs={10} className="mx-auto mb-5">
-          {jobs.map((jobData) => (
-            <Job key={jobData._id} data={jobData} />
-          ))}
-        </Col>
+        {isError ? (<Alert variant="danger">Error</Alert>) : isLoading ? (
+          <Spinner animation="border" />
+        ) :  (
+          <Col xs={10} className="mx-auto mb-5">
+            {jobs.map((jobData) => (
+              <Job key={jobData._id} data={jobData} />
+            ))}
+          </Col>
+        )}
       </Row>
     </Container>
   );
