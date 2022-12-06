@@ -17,7 +17,7 @@ export default function Favs() {
             {jobs.map((job, i) => (
               <Row key={i} className="my-4 align-items-center">
                 <Col xs={1}>
-                  <Button
+                  <Button className="remove"
                     variant="danger"
                     onClick={() => {
                       dispatch(removeFromFavsAction(i));
